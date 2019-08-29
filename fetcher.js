@@ -8,7 +8,6 @@ const file = args[1];
 if (!args.length) return;
 
 fs.open(file, 'wx', (err, fd) => {
-
   // IF file exists
   if (err && err.code === 'EEXIST') {
     // Ask user to overwrite or not
@@ -25,7 +24,6 @@ fs.open(file, 'wx', (err, fd) => {
 
       // IF 'yes', send request and write to file
       } else if (answer === 'y') {
-
         try {
           request(url, (err, res, body) => {
             // Handle invalid domain
@@ -58,7 +56,6 @@ fs.open(file, 'wx', (err, fd) => {
 
   // IF file doesn't exist, send request and write file
   } else {
-
     try {
       request(url, (err, res, body) => {
         // Handle invalid domain
@@ -84,6 +81,5 @@ fs.open(file, 'wx', (err, fd) => {
     } catch (err) {
       console.log(`\nThe url ${url} is invalid...\n`);
     }
-
   }
 });
