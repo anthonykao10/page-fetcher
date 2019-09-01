@@ -33,11 +33,6 @@ const fetcher = function() {
   const [, , url, file] = process.argv;
   if (!url || !file) return;
 
-  // rl = readline.createInterface({
-  //   input: process.stdin,
-  //   output: process.stdout
-  // });
-  
   fs.open(file, 'wx', (err, fd) => {
     // Check if file exists
     if (err && err.code === 'EEXIST') {
