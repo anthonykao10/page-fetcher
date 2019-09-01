@@ -32,21 +32,27 @@ const getPage = function(url, file) {
 const fetcher = function() {
   const [, , url, file] = process.argv;
   if (!url || !file) return;
-  
-  rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+
+  // rl = readline.createInterface({
+  //   input: process.stdin,
+  //   output: process.stdout
+  // });
   
   fs.open(file, 'wx', (err, fd) => {
     // Check if file exists
     if (err && err.code === 'EEXIST') {
       // Prompt user to overwrite or not
-  
+      rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
       rl.question(`File: '${file}' already exists. Would you like to overwrite? (y or n)\n`, (answer) => {
         if (answer === 'n') process.exit();
-        if (answer === 'y') getPage(url, file);
-        rl.close();
+        if (answer === 'y') {
+          getPage(url, file);
+          rl.close();
+        }
       });
   
     // Create file if doesn't exist
